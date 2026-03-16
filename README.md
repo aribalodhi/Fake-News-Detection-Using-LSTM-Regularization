@@ -1,1 +1,1 @@
-# Fake-News-Detection-Using-LSTM-Regularization
+# Fake-News-Detection-Using-LSTM-and-Regularization
