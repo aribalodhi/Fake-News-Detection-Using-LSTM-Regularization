@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2-Week Research Plan — Fake News Detection</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --navy:      #0A1628;
+    --navy-mid:  #0F2040;
+    --navy-card: #152847;
+    --teal:      #0D9488;
+    --teal-b:    #14B8A6;
+    --teal-l:    #CCFBF1;
+    --amber:     #F59E0B;
+    --amber-l:   #FEF3C7;
+    --coral:     #F87171;
+    --coral-l:   #FEE2E2;
+    --purple:    #818CF8;
+    --purple-l:  #EEF2FF;
+    --green:     #22C55E;
+    --green-l:   #DCFCE7;
+    --gray:      #64748B;
+    --gray-l:    #F1F5F9;
+    --white:     #FFFFFF;
+    --text:      #0F172A;
+    --text-2:    #475569;
+    --text-3:    #94A3B8;
+    --border:    #E2E8F0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #F8FAFC;
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 14px;
+  }
+
+  /* ── Page wrapper ─────────────────────────────────── */
+  .page { max-width: 1100px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  /* ── Hero header ──────────────────────────────────── */
+  .hero {
+    background: var(--navy);
+    border-radius: 20px;
+    padding: 40px 44px;
+    margin-bottom: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--teal), var(--purple), var(--amber));
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    color: var(--teal-b);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .hero-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .hero-sub {
+    font-size: 15px;
+    color: #94A3B8;
+    margin-bottom: 28px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .hero-badge {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 12px;
+    color: #CBD5E1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .hero-badge span { font-weight: 600; color: var(--teal-b); }
+
+  /* ── Progress bar ─────────────────────────────────── */
+  .progress-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .progress-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .progress-track {
+    flex: 1;
+    height: 10px;
+    background: var(--gray-l);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal), var(--teal-b));
+    border-radius: 5px;
+    transition: width .4s ease;
+    width: 0%;
+  }
+  .progress-pct {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--teal);
+    min-width: 90px;
+    text-align: right;
+  }
+
+  /* ── Legend ───────────────────────────────────────── */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    margin-bottom: 28px;
+    padding: 14px 18px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: var(--text-2);
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Week section ─────────────────────────────────── */
+  .week-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+    margin-top: 12px;
+  }
+  .week-pill {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    padding: 5px 14px;
+    border-radius: 20px;
+    text-transform: uppercase;
+  }
+  .w1-pill { background: #EEF2FF; color: #4338CA; }
+  .w2-pill { background: #F0FDF4; color: #15803D; }
+  .week-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .week-desc {
+    font-size: 12px;
+    color: var(--text-3);
+    margin-left: auto;
+    font-style: italic;
+  }
+
+  /* ── Days grid ────────────────────────────────────── */
+  .days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  @media (max-width: 900px) {
+    .days-grid { grid-template-columns: repeat(4, minmax(0,1fr)); }
+  }
+  @media (max-width: 600px) {
+    .days-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  }
+
+  .day-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    transition: box-shadow .15s;
+  }
+  .day-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.07); }
+  .day-card.weekend { background: #FAFAFA; }
+  .day-card.all-done { border-color: var(--teal); }
+
+  .day-top-bar {
+    height: 4px;
+    border-radius: 2px;
+    margin-bottom: 10px;
+  }
+  .day-meta {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    color: var(--text-3);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .day-num {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .day-phase {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-2);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── Task rows ────────────────────────────────────── */
+  .task-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    padding: 5px 4px;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: background .1s;
+    margin-bottom: 2px;
+  }
+  .task-row:hover { background: var(--gray-l); }
+  .task-row:last-child { margin-bottom: 0; }
+
+  .task-check {
+    width: 15px;
+    height: 15px;
+    border-radius: 4px;
+    border: 1.5px solid #CBD5E1;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .15s;
+    background: var(--white);
+  }
+  .task-row.done .task-check {
+    background: var(--teal);
+    border-color: var(--teal);
+  }
+  .check-svg { display: none; }
+  .task-row.done .check-svg { display: block; }
+
+  .task-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .task-text {
+    font-size: 11px;
+    color: var(--text-2);
+    line-height: 1.5;
+    flex: 1;
+  }
+  .task-row.done .task-text {
+    text-decoration: line-through;
+    color: var(--text-3);
+  }
+
+  /* ── Deliverables ─────────────────────────────────── */
+  .section-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 32px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+  }
+  .del-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  @media(max-width:600px){ .del-grid{ grid-template-columns:1fr; } }
+
+  .del-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 4px solid;
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .del-card-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+  .del-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .del-list li {
+    font-size: 12px;
+    color: var(--text-2);
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+  }
+  .del-list li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+    margin-top: 5px;
+    opacity: .5;
+  }
+
+  /* ── Paper writing guide ──────────────────────────── */
+  .paper-guide {
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+  }
+  .paper-guide-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 18px;
+  }
+  .sections-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    gap: 10px;
+  }
+  @media(max-width:700px){ .sections-grid{ grid-template-columns:1fr 1fr; } }
+
+  .sec-card {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 10px;
+    padding: 12px;
+  }
+  .sec-card-day {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--teal-b);
+    letter-spacing: .05em;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .sec-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 5px;
+  }
+  .sec-card-words {
+    font-size: 11px;
+    color: #64748B;
+  }
+  .sec-card-tip {
+    font-size: 10px;
+    color: #94A3B8;
+    margin-top: 5px;
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  /* ── Tips box ─────────────────────────────────────── */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  @media(max-width:700px){ .tips-grid{ grid-template-columns:1fr; } }
+
+  .tip-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .tip-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .tip-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .tip-body {
+    font-size: 11px;
+    color: var(--text-2);
+    line-height: 1.6;
+  }
+
+  /* ── Footer ───────────────────────────────────────── */
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-3);
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 16px;
+  }
+
+  @media print {
+    body { background: white; }
+    .page { padding: 20px; }
+    .hero { border-radius: 8px; }
+    .day-card:hover { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── Hero ────────────────────────────────────────── -->
+  <div class="hero">
+    <div class="hero-eyebrow">MS Research Project</div>
+    <div class="hero-title">2-Week Research Plan</div>
+    <div class="hero-sub">Fake News Detection — LSTM with Regularization &amp; BERT Improvement</div>
+    <div class="hero-meta">
+      <div class="hero-badge">Team: <span>Zahara · Fatima · Hafsa</span></div>
+      <div class="hero-badge">Base Paper: <span>arXiv 2411.10713</span></div>
+      <div class="hero-badge">Duration: <span>14 days</span></div>
+      <div class="hero-badge">Goal: <span>Working models + Research paper</span></div>
+    </div>
+  </div>
+
+  <!-- ── Progress ─────────────────────────────────────── -->
+  <div class="progress-box">
+    <div class="progress-label">Overall progress</div>
+    <div class="progress-track"><div class="progress-fill" id="prog-fill"></div></div>
+    <div class="progress-pct" id="prog-label">0 / 56 tasks</div>
+  </div>
+
+  <!-- ── Legend ───────────────────────────────────────── -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#818CF8"></div> Coding / Experiments</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#22C55E"></div> Paper writing</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#F87171"></div> Research / Reading</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#F59E0B"></div> Analysis / Results</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#94A3B8"></div> Rest / Review</div>
+    <div class="legend-item" style="margin-left:auto">
+      <svg width="14" height="14" viewBox="0 0 14 14"><rect width="14" height="14" rx="3" fill="#0D9488"/><path d="M3 7l3 3 5-5" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+      Click any task to mark as done
+    </div>
+  </div>
+
+  <!-- ── Week 1 ──────────────────────────────────────── -->
+  <div class="week-header">
+    <span class="week-pill w1-pill">Week 1</span>
+    <span class="week-name">Implementation &amp; Experiments</span>
+    <span class="week-desc">Days 1–7 · Build all models, run experiments, collect results</span>
+  </div>
+  <div class="days-grid" id="week1-grid"></div>
+
+  <!-- ── Week 2 ──────────────────────────────────────── -->
+  <div class="week-header">
+    <span class="week-pill w2-pill">Week 2</span>
+    <span class="week-name">Results &amp; Paper Writing</span>
+    <span class="week-desc">Days 8–14 · Write every section, assemble, and submit</span>
+  </div>
+  <div class="days-grid" id="week2-grid"></div>
+
+  <!-- ── Paper Writing Guide ──────────────────────────── -->
+  <div class="paper-guide">
+    <div class="paper-guide-title">Research Paper — Section-by-Section Writing Guide</div>
+    <div class="sections-grid" id="sections-grid"></div>
+  </div>
+
+  <!-- ── Deliverables ─────────────────────────────────── -->
+  <div class="section-title">Key Deliverables</div>
+  <div class="del-grid">
+    <div class="del-card" style="border-left-color:#818CF8">
+      <div class="del-card-title">End of Week 1</div>
+      <ul class="del-list">
+        <li>All 3 LSTM models trained on clean ISOT data</li>
+        <li>Data leakage identified, fixed and documented</li>
+        <li>BERT fine-tuning complete with accuracy recorded</li>
+        <li>LIME explainability plots generated</li>
+        <li>All figures saved as PNG (confusion matrices, charts)</li>
+      </ul>
+    </div>
+    <div class="del-card" style="border-left-color:#22C55E">
+      <div class="del-card-title">End of Week 2</div>
+      <ul class="del-list">
+        <li>Complete research paper draft (6–8 pages IEEE)</li>
+        <li>All figures inserted with captions and numbering</li>
+        <li>Literature review with 6–8 cited papers</li>
+        <li>Final PDF exported and proofread</li>
+        <li>Paper submitted to arXiv or target conference</li>
+      </ul>
+    </div>
+    <div class="del-card" style="border-left-color:#F87171">
+      <div class="del-card-title">Related papers to cite</div>
+      <ul class="del-list">
+        <li>arXiv:2411.10713 — Base paper (LSTM regularization)</li>
+        <li>BERT: Pre-training of Deep Bidirectional Transformers (Devlin et al.)</li>
+        <li>ISOT Fake News Dataset paper (Ahmed et al.)</li>
+        <li>LIAR dataset paper (Wang, 2017)</li>
+        <li>FakeNewsNet benchmark (Shu et al., 2020)</li>
+        <li>2+ recent survey papers on NLP fake news detection</li>
+      </ul>
+    </div>
+    <div class="del-card" style="border-left-color:#F59E0B">
+      <div class="del-card-title">Figures to include in paper</div>
+      <ul class="del-list">
+        <li>Model architecture diagram (draw.io or Canva)</li>
+        <li>Accuracy comparison bar chart (all 4 models)</li>
+        <li>Confusion matrix for each model</li>
+        <li>Training loss &amp; accuracy curves</li>
+        <li>LIME word importance visualization</li>
+        <li>Before/after accuracy chart (leakage fix)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── Tips ─────────────────────────────────────────── -->
+  <div class="section-title">3 Things That Will Make or Break Your Paper</div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon" style="background:#EEF2FF">🔍</div>
+      <div class="tip-title">Lead with the data leakage finding</div>
+      <div class="tip-body">Your single strongest original contribution is identifying the Reuters source-tag leakage in ISOT. Dedicate a full sub-section to it. Show the inflated 99% vs honest 88–93% accuracy side-by-side. This is what no other student paper in your class will have.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon" style="background:#F0FDF4">📄</div>
+      <div class="tip-title">Use the IEEE template from Day 1</div>
+      <div class="tip-body">Download the IEEE double-column Word or LaTeX template before you write a single word. Reformatting at the end wastes an entire day. Search "IEEE conference template" — it's free. Overleaf is the easiest option if you use LaTeX.</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon" style="background:#FFF7ED">✍️</div>
+      <div class="tip-title">Write the Abstract last (Day 11)</div>
+      <div class="tip-body">You can only write a good abstract after you know your results. Write it last. It should be 150–200 words and answer: what problem, what method, what dataset, what accuracy. Every sentence in the abstract must be backed by something in the paper body.</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    2-Week Research Plan · Fake News Detection with LSTM &amp; BERT · Team: Zahara, Fatima, Hafsa<br>
+    Base Paper: arXiv:2411.10713 · IEEE SPICSCON 2024
+  </div>
+</div>
+
+<script>
+const COLORS = {
+  code:     '#818CF8',
+  paper:    '#22C55E',
+  research: '#F87171',
+  analysis: '#F59E0B',
+  rest:     '#94A3B8',
+};
+
+const days = [
+  { day:1,  name:'Mon', label:'Day 1',  week:1, phase:'Setup & Dataset',       bar:'#818CF8',
+    tasks:[
+      {t:'Download ISOT dataset (Fake.csv + True.csv) from Kaggle',     type:'code'},
+      {t:'Set up Google Colab with T4 GPU runtime',                     type:'code'},
+      {t:'Read base paper arXiv:2411.10713 fully — take notes',         type:'research'},
+      {t:'Run data leakage diagnosis — count Reuters occurrences',      type:'analysis'},
+    ]},
+  { day:2,  name:'Tue', label:'Day 2',  week:1, phase:'Preprocessing',         bar:'#818CF8',
+    tasks:[
+      {t:'Apply data leakage fix — remove Reuters + source tags',       type:'code'},
+      {t:'Run full text preprocessing (clean, tokenize, pad)',          type:'code'},
+      {t:'Verify dataset after cleaning — check word distributions',    type:'analysis'},
+      {t:'Write preprocessing notes for paper Methodology section',     type:'paper'},
+    ]},
+  { day:3,  name:'Wed', label:'Day 3',  week:1, phase:'Models 1 & 2',          bar:'#818CF8',
+    tasks:[
+      {t:'Train Model 1 — Baseline LSTM. Record honest accuracy.',      type:'code'},
+      {t:'Train Model 2 — LSTM + Dropout + L2. Compare results.',       type:'code'},
+      {t:'Plot training loss/accuracy curves for both models.',         type:'analysis'},
+      {t:'Save confusion matrix screenshots for paper.',                type:'analysis'},
+    ]},
+  { day:4,  name:'Thu', label:'Day 4',  week:1, phase:'Model 3 + Reading',     bar:'#818CF8',
+    tasks:[
+      {t:'Train Model 3 — BiLSTM + BatchNorm. Record results.',         type:'code'},
+      {t:'Compare all 3 LSTM models side-by-side in a table.',          type:'analysis'},
+      {t:'Test live prediction on 5 real-world news articles.',         type:'code'},
+      {t:'Find 5 related papers on Google Scholar — save PDFs.',        type:'research'},
+    ]},
+  { day:5,  name:'Fri', label:'Day 5',  week:1, phase:'BERT Fine-tuning',      bar:'#818CF8',
+    tasks:[
+      {t:'Start BERT fine-tuning (Model 4) — runs ~1 hr on Colab.',    type:'code'},
+      {t:'While BERT trains: read 5 related papers, take notes.',       type:'research'},
+      {t:'Record BERT accuracy and compare to LSTM models.',            type:'analysis'},
+      {t:'Write outline for your research paper (8 sections).',         type:'paper'},
+    ]},
+  { day:6,  name:'Sat', label:'Day 6',  week:1, phase:'LIME Explainability',   bar:'#818CF8',
+    tasks:[
+      {t:'Install LIME — run explainability on Model 3 predictions.',   type:'code'},
+      {t:'Generate word importance plots (fake vs real top words).',    type:'analysis'},
+      {t:'Save all figures as PNG (charts, matrices, LIME plots).',     type:'analysis'},
+      {t:'Write Abstract (150–200 words) and Introduction draft.',      type:'paper'},
+    ]},
+  { day:7,  name:'Sun', label:'Day 7',  week:1, phase:'Review & Rest',         bar:'#94A3B8', weekend:true,
+    tasks:[
+      {t:'Review all Week 1 results — fix any failed experiments.',     type:'rest'},
+      {t:'Organise all figures + result tables in one folder.',         type:'rest'},
+      {t:'Backup entire Colab notebook to Google Drive.',               type:'rest'},
+      {t:'Rest — lightly skim 2 more related papers.',                  type:'rest'},
+    ]},
+  { day:8,  name:'Mon', label:'Day 8',  week:2, phase:'Literature Review',     bar:'#22C55E',
+    tasks:[
+      {t:'Write Literature Review section (400–600 words, 6–8 papers)',type:'paper'},
+      {t:'Create comparison table: your work vs related work.',         type:'paper'},
+      {t:'Format all citations in IEEE style (use Google Scholar).',    type:'paper'},
+      {t:'Write Problem Statement section (200 words).',                type:'paper'},
+    ]},
+  { day:9,  name:'Tue', label:'Day 9',  week:2, phase:'Methodology',           bar:'#22C55E',
+    tasks:[
+      {t:'Write Methodology section — dataset, preprocessing, models.', type:'paper'},
+      {t:'Draw clean model architecture diagram (draw.io or Canva).',   type:'paper'},
+      {t:'Document data leakage problem + fix as its own sub-section.', type:'paper'},
+      {t:'Write Experimental Setup section (hardware, splits, epochs).', type:'paper'},
+    ]},
+  { day:10, name:'Wed', label:'Day 10', week:2, phase:'Results Section',       bar:'#22C55E',
+    tasks:[
+      {t:'Write Results section — present all accuracy numbers in table.', type:'paper'},
+      {t:'Insert all figures: bar chart, confusion matrices, curves.',  type:'paper'},
+      {t:'Write LIME explainability results as a sub-section.',         type:'paper'},
+      {t:'Run any missing experiments to fill result gaps.',            type:'code'},
+    ]},
+  { day:11, name:'Thu', label:'Day 11', week:2, phase:'Discussion',            bar:'#22C55E',
+    tasks:[
+      {t:'Write Discussion — why BERT beats LSTM, leakage significance.',type:'paper'},
+      {t:'Write Future Work section (BERT, Urdu dataset, GNN).',        type:'paper'},
+      {t:'Write Conclusion (250–300 words).',                           type:'paper'},
+      {t:'Now write the Abstract — you know your results now.',         type:'paper'},
+    ]},
+  { day:12, name:'Fri', label:'Day 12', week:2, phase:'Assemble Draft',        bar:'#22C55E',
+    tasks:[
+      {t:'Assemble full paper using IEEE template (Word or Overleaf).', type:'paper'},
+      {t:'Check all figures have captions and correct numbering.',       type:'paper'},
+      {t:'Check all citations are formatted properly in References.',    type:'paper'},
+      {t:'Read the full paper once — fix flow and typos.',              type:'paper'},
+    ]},
+  { day:13, name:'Sat', label:'Day 13', week:2, phase:'Review & Fix',          bar:'#F59E0B',
+    tasks:[
+      {t:'Give paper to a peer to read — note their feedback.',         type:'rest'},
+      {t:'Fix any unclear sections based on feedback.',                 type:'paper'},
+      {t:'Verify: every result in paper matches your Colab outputs.',   type:'analysis'},
+      {t:'Proofread abstract and conclusion one more time.',            type:'paper'},
+    ]},
+  { day:14, name:'Sun', label:'Day 14', week:2, phase:'Submit!',               bar:'#22C55E', weekend:true,
+    tasks:[
+      {t:'Final read-through of complete paper.',                       type:'paper'},
+      {t:'Export as PDF — verify formatting looks correct.',            type:'paper'},
+      {t:'Upload to arXiv (free) or submit to target conference.',      type:'paper'},
+      {t:'Celebrate — you wrote your first research paper!',            type:'rest'},
+    ]},
+];
+
+const paperSections = [
+  { day:'Day 8',  title:'Literature Review', words:'400–600 words', tip:'Summarise 6–8 papers. Show what gap your work fills.' },
+  { day:'Day 9',  title:'Methodology',       words:'500–700 words', tip:'Dataset + preprocessing + model architectures.' },
+  { day:'Day 10', title:'Results',           words:'300–400 words', tip:'Tables + figures. Let numbers speak first.' },
+  { day:'Day 11', title:'Discussion',        words:'300–400 words', tip:'Explain WHY the results are what they are.' },
+  { day:'Day 11', title:'Future Work',       words:'150–200 words', tip:'BERT, Urdu dataset, explainability, GNN.' },
+  { day:'Day 11', title:'Conclusion',        words:'250–300 words', tip:'Summarise: problem, method, key result.' },
+  { day:'Day 11', title:'Abstract',          words:'150–200 words', tip:'Write LAST — after you know all results.' },
+  { day:'Day 8',  title:'Introduction',      words:'300–400 words', tip:'Problem → why it matters → your contribution.' },
+];
+
+let states = {};
+days.forEach(d => d.tasks.forEach((t,i) => states[`${d.day}-${i}`] = false));
+
+function updateProgress() {
+  const total = Object.keys(states).length;
+  const done  = Object.values(states).filter(Boolean).length;
+  const pct   = Math.round(done/total*100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-label').textContent = `${done} / ${total} tasks done (${pct}%)`;
+}
+
+function buildDays(containerId, weekNum) {
+  const container = document.getElementById(containerId);
+  days.filter(d => d.week === weekNum).forEach(d => {
+    const card = document.createElement('div');
+    card.className = 'day-card' + (d.weekend ? ' weekend' : '');
+    card.id = `card-day-${d.day}`;
+
+    const bar = document.createElement('div');
+    bar.className = 'day-top-bar';
+    bar.style.background = d.bar;
+    card.appendChild(bar);
+
+    const meta = document.createElement('div');
+    meta.className = 'day-meta';
+    meta.textContent = d.label + ' · ' + d.name;
+    card.appendChild(meta);
+
+    const num = document.createElement('div');
+    num.className = 'day-num';
+    num.textContent = d.day;
+    card.appendChild(num);
+
+    const phase = document.createElement('div');
+    phase.className = 'day-phase';
+    phase.textContent = d.phase;
+    card.appendChild(phase);
+
+    d.tasks.forEach((t, i) => {
+      const key = `${d.day}-${i}`;
+      const row = document.createElement('div');
+      row.className = 'task-row';
+      row.innerHTML = `
+        <div class="task-check">
+          <svg class="check-svg" width="9" height="7" viewBox="0 0 9 7" fill="none">
+            <path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="task-dot" style="background:${COLORS[t.type]}"></div>
+        <div class="task-text">${t.t}</div>
+      `;
+      row.addEventListener('click', () => {
+        states[key] = !states[key];
+        row.classList.toggle('done', states[key]);
+        const allDone = d.tasks.every((_,j) => states[`${d.day}-${j}`]);
+        card.classList.toggle('all-done', allDone);
+        updateProgress();
+      });
+      card.appendChild(row);
+    });
+
+    container.appendChild(card);
+  });
+}
+
+function buildSections() {
+  const grid = document.getElementById('sections-grid');
+  paperSections.forEach(sec => {
+    const card = document.createElement('div');
+    card.className = 'sec-card';
+    card.innerHTML = `
+      <div class="sec-card-day">${sec.day}</div>
+      <div class="sec-card-title">${sec.title}</div>
+      <div class="sec-card-words">${sec.words}</div>
+      <div class="sec-card-tip">${sec.tip}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+buildDays('week1-grid', 1);
+buildDays('week2-grid', 2);
+buildSections();
+updateProgress();
+</script>
+</body>
+</html>
